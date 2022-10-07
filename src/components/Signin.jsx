@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Signin = () => {
   const [form, setForm] = useState({
@@ -25,7 +27,9 @@ const Signin = () => {
           onSubmit={handleSubmit}
         >
           <h3 className="text-3xl mb-8">Student Login</h3>
-
+          <Link to="/" className="text-sm">
+            Go back <ArrowBackIcon />
+          </Link>
           <TextField
             id="outlined-email"
             label="Email"

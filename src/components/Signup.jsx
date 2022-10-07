@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 import Navbar from './Navbar';
+import { Link } from 'react-router-dom';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const Signup = () => {
   const [form, setForm] = useState({
@@ -27,6 +29,9 @@ const Signup = () => {
           onSubmit={handleSubmit}
         >
           <h3 className="text-3xl mb-8">Student Signup</h3>
+          <Link to="/" className="text-sm">
+            Go back <ArrowBackIcon />
+          </Link>
           <TextField
             id="outlined-name"
             label="Full Name"
@@ -62,7 +67,7 @@ const Signup = () => {
             name="dob"
             required
           />
-
+          <Link to="/signin">Already Registered? Sign in</Link>
           <button
             className="w-[130px] rounded relative inline-flex group items-center justify-center px-3.5 py-2 m-1 cursor-pointer border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white"
             type="submit"
