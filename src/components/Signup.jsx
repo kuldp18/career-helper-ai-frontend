@@ -3,23 +3,77 @@ import { TextField } from '@mui/material';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { signup } from '../auth';
+import { Redirect } from 'react-router-dom';
 
 const Signup = () => {
   const [form, setForm] = useState({
-    fullName: '',
+    fullname: '',
     email: '',
     password: '',
-    dob: null,
+    dob: '',
+    error: '',
+    success: true,
   });
+
   const handleChange = (e) => {
     e.preventDefault();
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
+  const { fullname, email, password, dob, error, success } = form;
+
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(form);
+    setForm({ ...form, error: false });
+    signup({ fullname, email, password, dob })
+      .then((data) => {
+        if (data.error) {
+          setForm({ ...form, error: data.error, success: false });
+        } else {
+          setForm({
+            ...form,
+            fullname: '',
+            email: '',
+            password: '',
+            dob: '',
+            error: '',
+            success: true,
+          });
+        }
+      })
+      .catch((err) => {
+        console.log('error in signing up!');
+        console.error(err);
+      });
+
+    console.log(form);
   };
+
+  // const submitForm = (e) => {
+  //   e.preventDefault();
+  //   setFormValues({ ...formValues, error: false });
+  //   signup({ name, email, password })
+  //     .then((data) => {
+  //       if (data.error) {
+  //         setFormValues({ ...formValues, error: data.error, success: false });
+  //       } else {
+  //         setFormValues({
+  //           ...formValues,
+  //           name: '',
+  //           email: '',
+  //           password: '',
+  //           error: '',
+  //           success: true,
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       console.log('error in signing up!');
+  //       console.error(err);
+  //     });
+  // };
   return (
     <>
       <Navbar />
@@ -35,9 +89,9 @@ const Signup = () => {
           <TextField
             id="outlined-name"
             label="Full Name"
-            value={form.fullName}
+            value={form.fullname}
             onChange={handleChange}
-            name="fullName"
+            name="fullname"
             required
           />
           <TextField
@@ -77,6 +131,8 @@ const Signup = () => {
           </button>
         </form>
       </div>
+
+      {success && <Redirect to="/signin" />}
     </>
   );
 };
