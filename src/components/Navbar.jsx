@@ -28,9 +28,11 @@ function Navbar(props) {
 
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        Career Helper AI
-      </Typography>
+      <Link to="/">
+        <Typography variant="h6" sx={{ my: 2 }}>
+          Career Helper AI
+        </Typography>
+      </Link>
       <Divider />
       <List>
         {navItems.map((item) => {
@@ -65,14 +67,16 @@ function Navbar(props) {
           >
             <MenuIcon />
           </IconButton>
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            Career Helper AI
-          </Typography>
-          <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+          <Link to="/">
+            <Typography
+              variant="h6"
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              Career Helper AI
+            </Typography>
+          </Link>
+          <Box sx={{ display: { xs: 'none', sm: 'block', lg: 'none' } }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }}>
                 {item}
