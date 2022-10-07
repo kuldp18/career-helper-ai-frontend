@@ -35,7 +35,6 @@ function Navbar(props) {
       <List>
         {navItems.map((item) => {
           const route = item.split(' ').join('').toLowerCase();
-          console.log(route);
           return (
             <ListItem key={item} disablePadding>
               <Link to={`/${route}`}>
