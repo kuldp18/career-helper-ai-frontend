@@ -19,12 +19,12 @@ const Signin = () => {
   return (
     <>
       <Navbar />
-      <div>
+      <div className="bg-white h-[80vh] w-[80%] mx-auto mb-12 flex justify-center items-center">
         <form
           className="w-[70%] p-5 flex flex-col gap-5"
           onSubmit={handleSubmit}
         >
-          <h3 className="text-3xl mb-8">Student Signin</h3>
+          <h3 className="text-3xl mb-8">Student Login</h3>
 
           <TextField
             id="outlined-email"

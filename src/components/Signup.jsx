@@ -21,7 +21,7 @@ const Signup = () => {
   return (
     <>
       <Navbar />
-      <div>
+      <div className="bg-white h-[80vh] w-[80%] mx-auto mb-12">
         <form
           className="w-[70%] p-5 flex flex-col gap-5"
           onSubmit={handleSubmit}
