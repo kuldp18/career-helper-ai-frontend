@@ -68,7 +68,7 @@ const Signup = () => {
             type="submit"
           >
             <span className="absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10"></span>
-            <span className="relative">Submit</span>
+            <span className="relative">Sign up</span>
           </button>
         </form>
       </div>
