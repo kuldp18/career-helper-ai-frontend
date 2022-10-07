@@ -13,6 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const drawerWidth = 240;
 const navItems = ['Home', 'Sign up', 'Sign in'];
@@ -32,13 +33,19 @@ function Navbar(props) {
       </Typography>
       <Divider />
       <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton sx={{ textAlign: 'center' }}>
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
+        {navItems.map((item) => {
+          const route = item.split(' ').join('').toLowerCase();
+          console.log(route);
+          return (
+            <ListItem key={item} disablePadding>
+              <Link to={`/${route}`}>
+                <ListItemButton sx={{ textAlign: 'center' }}>
+                  <ListItemText primary={item} />
+                </ListItemButton>
+              </Link>
+            </ListItem>
+          );
+        })}
       </List>
     </Box>
   );
