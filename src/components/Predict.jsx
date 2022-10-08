@@ -5,6 +5,7 @@ import {
   Select,
   InputLabel,
   FormControl,
+  Slider,
 } from '@mui/material';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
@@ -83,7 +84,7 @@ const Predict = () => {
             </>
           )}
 
-          {currentlyIn !== 'ug' && (
+          {/* {currentlyIn !== 'ug' && (
             <>
               <InputLabel id="favsub">Your Favorite Subject?</InputLabel>
               <Select labelId="favsub" id="favsub" label="favsub">
@@ -98,8 +99,8 @@ const Predict = () => {
                 <MenuItem value="Chemistry">Chemistry</MenuItem>
               </Select>
             </>
-          )}
-
+          )} */}
+          {/* 
           {currentlyIn === 'ug' && (
             <>
               <InputLabel id="internship">
@@ -116,7 +117,7 @@ const Predict = () => {
                 <MenuItem value="no-internship">No</MenuItem>
               </Select>
             </>
-          )}
+          )} */}
 
           {internship === 'internship' && (
             <TextField
@@ -128,7 +129,7 @@ const Predict = () => {
             />
           )}
 
-          <InputLabel id="interest">Your Interests?</InputLabel>
+          {/* <InputLabel id="interest">Your Interests?</InputLabel>
           <Select labelId="interest" id="interest" label="interest" required>
             <MenuItem value="painting">Painting</MenuItem>
             <MenuItem value="reading">Reading</MenuItem>
@@ -147,11 +148,212 @@ const Predict = () => {
             <MenuItem value="coding">Coding</MenuItem>
             <MenuItem value="graphic-designing">Graphic Designing</MenuItem>
             <MenuItem value="drawing">Drawing</MenuItem>
-          </Select>
+          </Select> */}
 
-          <Link to="/result">
+          <InputLabel id="history">
+            How much do you like to know history?
+          </InputLabel>
+          <Slider
+            aria-label="history"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="numerical-reasoning">
+            How will you rate your aptitude and reasoning skills?
+          </InputLabel>
+          <Slider
+            aria-label="numerical-reasoning"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="reading">Rate your interest in reading.</InputLabel>
+          <Slider
+            aria-label="reading"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="geography">
+            Rate your interest in learning about the earth and its features.
+          </InputLabel>
+          <Slider
+            aria-label="geography"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="flexibility">
+            How likely are you to adapt in new evironments?
+          </InputLabel>
+          <Slider
+            aria-label="flexibility"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="team-building">
+            How much do you like to collaborate with other people?
+          </InputLabel>
+          <Slider
+            aria-label="team-building"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="customer-service">
+            How will you rate your feedback and improvement skills?
+          </InputLabel>
+          <Slider
+            aria-label="customer-service"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="multitasking">
+            How likely are you to work on multiple things at the same time?
+          </InputLabel>
+          <Slider
+            aria-label="multitasking"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="decision-making">
+            How would you rate your decision making skills?
+          </InputLabel>
+          <Slider
+            aria-label="decision-making"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="personality">How much friendly are you?</InputLabel>
+          <Slider
+            aria-label="personality"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="humbleness">
+            With regarding humbleness, how much do you rate yourself?
+          </InputLabel>
+          <Slider
+            aria-label="humbleness"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="oratory">
+            How effectively can you express your idea in front of people of
+            higher authorities?
+          </InputLabel>
+          <Slider
+            aria-label="oratory"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="integrity">
+            How much honest are you towards your work?
+          </InputLabel>
+          <Slider
+            aria-label="integrity"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="negotiation">
+            How will you rate your debate / negotiation skills?
+          </InputLabel>
+          <Slider
+            aria-label="negotiation"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="memory">Rate your memorising skills.</InputLabel>
+          <Slider
+            aria-label="memory"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="critical-thinking">
+            Rate your critical thinking abilities.
+          </InputLabel>
+          <Slider
+            aria-label="critical-thinking"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="dedication">
+            How much likely are you to dedicate yourself towards a particular
+            task?
+          </InputLabel>
+          <Slider
+            aria-label="dedication"
+            defaultValue={0}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+
+          <Link to="/predict2">
             <button class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 bg-gray-900 rounded-lg hover:bg-gray-800 focus:shadow-outline focus:outline-none text-xl w-[200px] mx-auto">
-              Predict
+              Next
             </button>
           </Link>
         </form>

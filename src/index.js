@@ -7,6 +7,7 @@ import Signup from './components/Signup';
 import Signin from './components/Signin';
 import PrivateRoute from './auth/PrivateRoute';
 import Predict from './components/Predict';
+import Predict2 from './components/Predict2';
 import Result from './components/Result';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -19,6 +20,7 @@ root.render(
       <Route path="/signin" component={Signin} exact />
       {/* <PrivateRoute path="/predict" component={Predict} exact /> */}
       <Route path="/predict" component={Predict} exact />
+      <Route path="/predict2" component={Predict2} exact />
       <Route path="/result" component={Result} exact />
     </Switch>
   </Router>

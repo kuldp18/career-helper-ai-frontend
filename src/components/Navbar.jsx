@@ -30,7 +30,7 @@ function Navbar(props) {
     <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
       <Link to="/">
         <Typography variant="h6" sx={{ my: 2 }}>
-          Career Helper AI
+          Career Helper
         </Typography>
       </Link>
       <Divider />
@@ -73,7 +73,7 @@ function Navbar(props) {
               component="div"
               sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
             >
-              Career Helper AI
+              Career Helper
             </Typography>
           </Link>
           <Box sx={{ display: { xs: 'none', sm: 'block', lg: 'none' } }}>
