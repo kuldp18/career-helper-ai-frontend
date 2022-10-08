@@ -11,6 +11,33 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 
 const Predict2 = () => {
+  const [data, setData] = useState({
+    detective: 0,
+    selfDefense: 0,
+    physicalStrength: 0,
+    strategicPlanning: 0,
+    patriot: 0,
+    courage: 0,
+    leadership: 0,
+    interpersonal: 0,
+    professionalism: 0,
+    emphathetic: 0,
+    curiosity: 0,
+    attentionToDetail: 0,
+    adaptability: 0,
+    problemSolving: 0,
+    technicalSkills: 0,
+    softSkills: 0,
+    analyticalSkills: 0,
+    designingSkills: 0,
+    teamWork: 0,
+    organizationalSkills: 0,
+    activeLearning: 0,
+  });
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
   return (
     <>
       <div className="min-h-[100vh] bg-white flex flex-col gap-5 p-7">
@@ -22,8 +49,10 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="detective"
-            defaultValue={0}
+            value={data.detective}
+            name="detective"
             valueLabelDisplay="auto"
+            onChange={handleChange}
             step={1}
             marks
             min={0}
@@ -35,7 +64,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="self-defense"
-            defaultValue={0}
+            value={data.selfDefense}
+            onChange={handleChange}
+            name="selfDefense"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -47,7 +78,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="physical-strength"
-            defaultValue={0}
+            value={data.physicalStrength}
+            name="physicalStrength"
+            onChange={handleChange}
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -59,7 +92,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="strategic-planning"
-            defaultValue={0}
+            value={data.strategicPlanning}
+            name="strategicPlanning"
+            onChange={handleChange}
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -72,7 +107,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="patroit"
-            defaultValue={0}
+            value={data.patriot}
+            name="patriot"
+            onChange={handleChange}
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -85,7 +122,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="courage"
-            defaultValue={0}
+            value={data.courage}
+            onChange={handleChange}
+            name="courage"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -97,7 +136,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="leadership"
-            defaultValue={0}
+            value={data.leadership}
+            onChange={handleChange}
+            name="leadership"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -110,7 +151,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="interpersonal"
-            defaultValue={0}
+            value={data.interpersonal}
+            onChange={handleChange}
+            name="interpersonal"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -123,7 +166,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="professionalism"
-            defaultValue={0}
+            value={data.professionalism}
+            onChange={handleChange}
+            name="professionalism"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -135,7 +180,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="emphathetic"
-            defaultValue={0}
+            value={data.emphathetic}
+            onChange={handleChange}
+            name="emphathetic"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -147,7 +194,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="curiosity"
-            defaultValue={0}
+            value={data.curiosity}
+            onChange={handleChange}
+            name="curiosity"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -160,7 +209,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="attention-to-detail"
-            defaultValue={0}
+            value={data.attentionToDetail}
+            onChange={handleChange}
+            name="attentionToDetail"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -172,7 +223,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="adaptability"
-            defaultValue={0}
+            value={data.adaptability}
+            onChange={handleChange}
+            name="adaptability"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -184,7 +237,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="problem-solving"
-            defaultValue={0}
+            value={data.problemSolving}
+            onChange={handleChange}
+            name="problemSolving"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -196,7 +251,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="technical-skills"
-            defaultValue={0}
+            value={data.technicalSkills}
+            onChange={handleChange}
+            name="technicalSkills"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -208,7 +265,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="soft-skills"
-            defaultValue={0}
+            value={data.softSkills}
+            onChange={handleChange}
+            name="softSkills"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -220,7 +279,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="analytical-skills"
-            defaultValue={0}
+            value={data.analyticalSkills}
+            onChange={handleChange}
+            name="analyticalSkills"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -232,7 +293,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="designing-skills"
-            defaultValue={0}
+            value={data.designingSkills}
+            onChange={handleChange}
+            name="designingSkills"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -244,7 +307,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="team-work"
-            defaultValue={0}
+            value={data.teamWork}
+            onChange={handleChange}
+            name="teamWork"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -256,7 +321,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="organizational-skills"
-            defaultValue={0}
+            value={data.organizationalSkills}
+            onChange={handleChange}
+            name="organizationalSkills"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -268,7 +335,9 @@ const Predict2 = () => {
           </InputLabel>
           <Slider
             aria-label="active-learning"
-            defaultValue={0}
+            value={data.activeLearning}
+            onChange={handleChange}
+            name="activeLearning"
             valueLabelDisplay="auto"
             step={1}
             marks

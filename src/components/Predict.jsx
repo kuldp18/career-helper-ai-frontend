@@ -11,8 +11,35 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 
 const Predict = () => {
-  const [currentlyIn, setCurrentlyIn] = useState('');
-  const [internship, setInternship] = useState('');
+  const [data, setData] = useState({
+    age: '',
+    currentlyIn: '',
+    pursuing: '',
+    hsc: '',
+    ssc: '',
+    internship: '',
+    history: 0,
+    numericalReasoning: 0,
+    reading: 0,
+    geography: 0,
+    flexibility: 0,
+    teamBuilding: 0,
+    customerService: 0,
+    multiTasking: 0,
+    decisionMaking: 0,
+    personality: 0,
+    humbleness: 0,
+    oratory: 0,
+    integrity: 0,
+    negotiation: 0,
+    memory: 0,
+    criticalThinking: 0,
+    dedication: 0,
+  });
+
+  const handleChange = (e) => {
+    setData({ ...data, [e.target.name]: e.target.value });
+  };
   return (
     <>
       <div className="min-h-[100vh] bg-white flex flex-col gap-5 p-7">
@@ -24,6 +51,8 @@ const Predict = () => {
             label="Age"
             type={'number'}
             name="age"
+            value={data.age}
+            onChange={handleChange}
             required
           />
           <FormControl>
@@ -31,9 +60,10 @@ const Predict = () => {
             <Select
               labelId="currently-in"
               id="currently-in"
+              name="currentlyIn"
               label="Currently In?"
-              value={currentlyIn}
-              onChange={(e) => setCurrentlyIn(e.target.value)}
+              value={data.currentlyIn}
+              onChange={handleChange}
               required
             >
               <MenuItem value={'10th'}>10th Passed</MenuItem>
@@ -41,13 +71,16 @@ const Predict = () => {
               <MenuItem value={'ug'}>In College</MenuItem>
             </Select>
           </FormControl>
-          {currentlyIn === 'ug' && (
+          {data.currentlyIn === 'ug' && (
             <>
               <InputLabel id="pursuing">Currently Pursuing?</InputLabel>
               <Select
                 labelId="pursuing"
                 id="pursuing"
+                name="pursuing"
                 label="pursuing"
+                value={data.pursuing}
+                onChange={handleChange}
                 required
               >
                 <MenuItem value="BTech">BTech</MenuItem>
@@ -60,25 +93,29 @@ const Predict = () => {
             </>
           )}
 
-          {currentlyIn === '12th' && (
+          {data.currentlyIn === '12th' && (
             <>
               <TextField
                 id="outlined-12th"
                 label="12th Percentile"
                 type={'number'}
-                name="12th"
+                value={data.hsc}
+                onChange={handleChange}
+                name="hsc"
                 required
               />
             </>
           )}
 
-          {currentlyIn === '10th' && (
+          {data.currentlyIn === '10th' && (
             <>
               <TextField
                 id="outlined-10th"
                 label="10th Percentile"
+                onChange={handleChange}
                 type={'number'}
-                name="10th"
+                value={data.ssc}
+                name="ssc"
                 required
               />
             </>
@@ -119,12 +156,14 @@ const Predict = () => {
             </>
           )} */}
 
-          {internship === 'internship' && (
+          {data.internship === 'internship' && (
             <TextField
               id="outlined-age"
               label="Field of internship/certification?"
               type={'text'}
               name="internship"
+              onChange={handleChange}
+              value={data.internship}
               required
             />
           )}
@@ -155,8 +194,10 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="history"
-            defaultValue={0}
+            value={data.history}
             valueLabelDisplay="auto"
+            name="history"
+            onChange={handleChange}
             step={1}
             marks
             min={0}
@@ -167,7 +208,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="numerical-reasoning"
-            defaultValue={0}
+            value={data.numericalReasoning}
+            onChange={handleChange}
+            name="numericalReasoning"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -177,7 +220,9 @@ const Predict = () => {
           <InputLabel id="reading">Rate your interest in reading.</InputLabel>
           <Slider
             aria-label="reading"
-            defaultValue={0}
+            name="reading"
+            value={data.reading}
+            onChange={handleChange}
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -189,7 +234,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="geography"
-            defaultValue={0}
+            name="geography"
+            value={data.geography}
+            onChange={handleChange}
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -201,7 +248,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="flexibility"
-            defaultValue={0}
+            name="flexibility"
+            value={data.flexibility}
+            onChange={handleChange}
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -213,7 +262,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="team-building"
-            defaultValue={0}
+            value={data.teamBuilding}
+            onChange={handleChange}
+            name="teamBuilding"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -225,7 +276,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="customer-service"
-            defaultValue={0}
+            value={data.customerService}
+            onChange={handleChange}
+            name="customerService"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -237,7 +290,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="multitasking"
-            defaultValue={0}
+            value={data.multiTasking}
+            onChange={handleChange}
+            name="multiTasking"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -249,7 +304,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="decision-making"
-            defaultValue={0}
+            value={data.decisionMaking}
+            onChange={handleChange}
+            name="decisionMaking"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -259,7 +316,9 @@ const Predict = () => {
           <InputLabel id="personality">How much friendly are you?</InputLabel>
           <Slider
             aria-label="personality"
-            defaultValue={0}
+            value={data.personality}
+            onChange={handleChange}
+            name="personality"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -271,7 +330,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="humbleness"
-            defaultValue={0}
+            value={data.humbleness}
+            onChange={handleChange}
+            name="humbleness"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -284,7 +345,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="oratory"
-            defaultValue={0}
+            value={data.oratory}
+            onChange={handleChange}
+            name="oratory"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -296,7 +359,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="integrity"
-            defaultValue={0}
+            value={data.integrity}
+            onChange={handleChange}
+            name="integrity"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -308,7 +373,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="negotiation"
-            defaultValue={0}
+            value={data.negotiation}
+            onChange={handleChange}
+            name="negotiation"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -318,7 +385,9 @@ const Predict = () => {
           <InputLabel id="memory">Rate your memorising skills.</InputLabel>
           <Slider
             aria-label="memory"
-            defaultValue={0}
+            value={data.memory}
+            onChange={handleChange}
+            name="memory"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -330,7 +399,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="critical-thinking"
-            defaultValue={0}
+            value={data.criticalThinking}
+            onChange={handleChange}
+            name="criticalThinking"
             valueLabelDisplay="auto"
             step={1}
             marks
@@ -343,7 +414,9 @@ const Predict = () => {
           </InputLabel>
           <Slider
             aria-label="dedication"
-            defaultValue={0}
+            value={data.dedication}
+            onChange={handleChange}
+            name="dedication"
             valueLabelDisplay="auto"
             step={1}
             marks
