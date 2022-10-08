@@ -13,7 +13,7 @@ const Signup = () => {
     password: '',
     dob: '',
     error: '',
-    success: true,
+    success: false,
   });
 
   const handleChange = (e) => {
@@ -29,9 +29,7 @@ const Signup = () => {
     setForm({ ...form, error: false });
     signup({ fullname, email, password, dob })
       .then((data) => {
-        if (data.error) {
-          setForm({ ...form, error: data.error, success: false });
-        } else {
+        if (!data.error) {
           setForm({
             ...form,
             fullname: '',
@@ -40,6 +38,12 @@ const Signup = () => {
             dob: '',
             error: '',
             success: true,
+          });
+        } else {
+          setForm({
+            ...form,
+            error: data.error,
+            success: false,
           });
         }
       })
@@ -132,7 +136,7 @@ const Signup = () => {
         </form>
       </div>
 
-      {success && <Redirect to="/signin" />}
+      {success && <p className="text-white">Signup successful!</p>}
     </>
   );
 };

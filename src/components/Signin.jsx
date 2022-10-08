@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
 import { TextField } from '@mui/material';
 import Navbar from './Navbar';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { signin, isAuthenticated, authenticate } from '../auth';
 
 const Signin = () => {
   const [form, setForm] = useState({
     email: '',
     password: '',
+    error: '',
+    loading: false,
+    didRedirect: false,
   });
+
+  const { email, password, error, loading, didRedirect } = form;
+
   const handleChange = (e) => {
     e.preventDefault();
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -16,7 +23,59 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(form);
+    setForm({ ...form, error: false, loading: true });
+    signin({ email, password })
+      .then((data) => {
+        if (data.error) {
+          setForm({ ...form, error: data.error, loading: false });
+        } else {
+          authenticate(data, () => {
+            setForm({
+              ...form,
+              email: '',
+              password: '',
+              error: '',
+              loading: false,
+              didRedirect: true,
+            });
+          });
+        }
+      })
+      .catch((err) => {
+        console.log('Signin failed!');
+        console.error(err);
+      });
+  };
+
+  const performRedirect = () => {
+    if (isAuthenticated()) {
+      return <Redirect to="/predict" />;
+    }
+  };
+
+  const loadingMessage = () => {
+    return (
+      loading && (
+        <div className="alert alert-info">
+          <h2>Loading...</h2>
+        </div>
+      )
+    );
+  };
+
+  const errorMessage = () => {
+    return (
+      <div className="row">
+        <div className="col-md-6 offset-sm-3 text-left">
+          <div
+            className="alert alert-danger"
+            style={{ display: error ? '' : 'none' }}
+          >
+            {error}
+          </div>
+        </div>
+      </div>
+    );
   };
   return (
     <>
@@ -58,6 +117,9 @@ const Signin = () => {
           </button>
         </form>
       </div>
+      {performRedirect()}
+      {loadingMessage()}
+      {errorMessage()}
     </>
   );
 };
