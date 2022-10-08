@@ -7,8 +7,8 @@ function App() {
     <div className="App">
       <Navbar />
       <div className="flex flex-col gap-4 justify-center items-center">
-        <h1 className="text-4xl text-white">AI Career Helper</h1>
-        <p className="text-lg text-white">Decide your career using AI</p>
+        <h1 className="text-4xl text-white">Career Helper</h1>
+        <p className="text-lg text-white">Decide your career easily</p>
         <div className="flex gap-4">
           <Link to="/signup">
             <a
