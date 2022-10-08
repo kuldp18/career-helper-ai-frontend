@@ -1,7 +1,7 @@
 import React from 'react';
 import image from '../img/result.svg';
 import ResultCard from './ResultCard';
-const Result = () => {
+const Result = ({ percentages }) => {
   return (
     <div className="min-h-[100vh] bg-white p-5 flex flex-col justify-center items-center gap-5">
       <h1 className="text-4xl">Predictions: </h1>

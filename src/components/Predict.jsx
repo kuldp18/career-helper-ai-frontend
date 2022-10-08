@@ -9,8 +9,18 @@ import {
 } from '@mui/material';
 import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
+import Modal from 'react-modal';
+import CloseIcon from '@mui/icons-material/Close';
 
 const Predict = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
   const [data, setData] = useState({
     age: '',
     currentlyIn: '',
@@ -35,17 +45,173 @@ const Predict = () => {
     memory: 0,
     criticalThinking: 0,
     dedication: 0,
+    detective: 0,
+    selfDefense: 0,
+    physicalStrength: 0,
+    strategicPlanning: 0,
+    patriot: 0,
+    courage: 0,
+    leadership: 0,
+    interpersonal: 0,
+    professionalism: 0,
+    emphathetic: 0,
+    curiosity: 0,
+    attentionToDetail: 0,
+    adaptability: 0,
+    problemSolving: 0,
+    technicalSkills: 0,
+    softSkills: 0,
+    analyticalSkills: 0,
+    designingSkills: 0,
+    teamWork: 0,
+    organizationalSkills: 0,
+    activeLearning: 0,
   });
+
+  const govtScore =
+    data.history + data.numericalReasoning + data.reading + data.geography;
+
+  const mgmtScore =
+    data.flexibility +
+    data.teamBuilding +
+    data.leadership +
+    data.negotiation +
+    data.customerService +
+    data.multiTasking +
+    data.decisionMaking +
+    data.personality +
+    data.humbleness;
+
+  const lawScore =
+    data.oratory +
+    data.integrity +
+    data.negotiation +
+    data.dedication +
+    data.reading +
+    data.memory +
+    data.criticalThinking +
+    data.attentionToDetail;
+
+  const defScore =
+    data.physicalStrength +
+    data.leadership +
+    data.dedication +
+    data.detective +
+    data.selfDefense +
+    data.strategicPlanning +
+    data.patriot +
+    data.courage;
+
+  const medScore =
+    data.interpersonal +
+    data.criticalThinking +
+    data.attentionToDetail +
+    data.professionalism +
+    data.emphathetic +
+    data.curiosity;
+
+  const engScore =
+    data.adaptability +
+    data.problemSolving +
+    data.technicalSkills +
+    data.criticalThinking +
+    data.softSkills +
+    data.analyticalSkills +
+    data.designingSkills +
+    data.teamWork +
+    data.organizationalSkills +
+    data.activeLearning;
+
+  const scores = {
+    govtScore,
+    mgmtScore,
+    lawScore,
+    defScore,
+    medScore,
+    engScore,
+  };
+
+  const GovernmentSector = (govtScore / 40) * 100;
+  const Management = (mgmtScore / 90) * 100;
+  const Law = (lawScore / 80) * 100;
+  const Defence = (defScore / 80) * 100;
+  const Medical = (medScore / 60) * 100;
+  const Engineering = (engScore / 100) * 100;
+
+  const percentages = {
+    GovernmentSector,
+    Management,
+    Law,
+    Defence,
+    Medical,
+    Engineering,
+  };
+
+  console.log(percentages);
+  const customStyles = {
+    content: {
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+  };
 
   const handleChange = (e) => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    openModal();
+  };
+
+  const pickHighest = (obj, num = 1) => {
+    const requiredObj = {};
+    if (num > Object.keys(obj).length) {
+      return false;
+    }
+    Object.keys(obj)
+      .sort((a, b) => obj[b] - obj[a])
+      .forEach((key, ind) => {
+        if (ind < num) {
+          requiredObj[key] = obj[key];
+        }
+      });
+    return requiredObj;
+  };
+
+  const topThree = pickHighest(percentages, 3);
+  const keys = Object.keys(topThree);
+  const values = Object.values(topThree);
+
   return (
     <>
       <div className="min-h-[100vh] bg-white flex flex-col gap-5 p-7">
         <Navbar />
+        <Modal
+          isOpen={isOpen}
+          onRequestClose={closeModal}
+          contentLabel="Example Modal"
+          style={customStyles}
+        >
+          <ol>
+            <li>1.{keys[0]}</li>
+            <li>2.{keys[1]}</li>
+            <li>3.{keys[2]}</li>
+          </ol>
+
+          <p onClick={closeModal} className="cursor-pointer">
+            <CloseIcon />
+          </p>
+        </Modal>
         <h1 className="text-3xl mx-auto">Predict your Career</h1>
-        <form className="flex flex-col gap-5 w-[70%] mx-auto">
+        <form
+          className="flex flex-col gap-5 w-[70%] mx-auto"
+          onSubmit={handleSubmit}
+        >
           <TextField
             id="outlined-age"
             label="Age"
@@ -424,11 +590,312 @@ const Predict = () => {
             max={10}
           />
 
-          <Link to="/predict2">
-            <button class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 bg-gray-900 rounded-lg hover:bg-gray-800 focus:shadow-outline focus:outline-none text-xl w-[200px] mx-auto">
-              Next
-            </button>
-          </Link>
+          <InputLabel id="detective">
+            How strongly are you aware about the environment around you?
+          </InputLabel>
+          <Slider
+            aria-label="detective"
+            value={data.detective}
+            name="detective"
+            valueLabelDisplay="auto"
+            onChange={handleChange}
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="self-defense">
+            How much do you rate your end to end combat skills? Rate it on the
+            basis of any physical training you might have done.
+          </InputLabel>
+          <Slider
+            aria-label="self-defense"
+            value={data.selfDefense}
+            onChange={handleChange}
+            name="selfDefense"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="physical-strength">
+            How much do you rate your fitness?
+          </InputLabel>
+          <Slider
+            aria-label="physical-strength"
+            value={data.physicalStrength}
+            name="physicalStrength"
+            onChange={handleChange}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="strategic-planning">
+            How much do you plan before doing a task?
+          </InputLabel>
+          <Slider
+            aria-label="strategic-planning"
+            value={data.strategicPlanning}
+            name="strategicPlanning"
+            onChange={handleChange}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="patroit">
+            How likely are you to work in India? (10 being extremely likely and
+            0 being not at all)
+          </InputLabel>
+          <Slider
+            aria-label="patroit"
+            value={data.patriot}
+            name="patriot"
+            onChange={handleChange}
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="courage">
+            How likely are you to take accountable risks in a difficult
+            situation?
+          </InputLabel>
+          <Slider
+            aria-label="courage"
+            value={data.courage}
+            onChange={handleChange}
+            name="courage"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="leadership">
+            How good are you at leading and representing others?
+          </InputLabel>
+          <Slider
+            aria-label="leadership"
+            value={data.leadership}
+            onChange={handleChange}
+            name="leadership"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="interpersonal">
+            How good are you at communicating & building relations in a
+            professional environment?
+          </InputLabel>
+          <Slider
+            aria-label="interpersonal"
+            value={data.interpersonal}
+            onChange={handleChange}
+            name="interpersonal"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="professionalism">
+            How will you rate yourself on basis of basic professional manners,
+            disciplines and punctuality?
+          </InputLabel>
+          <Slider
+            aria-label="professionalism"
+            value={data.professionalism}
+            onChange={handleChange}
+            name="professionalism"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="emphathetic">
+            How much are you able to understand other person's emotions?
+          </InputLabel>
+          <Slider
+            aria-label="emphathetic"
+            value={data.emphathetic}
+            onChange={handleChange}
+            name="emphathetic"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="curiosity">
+            How much do you like to explore different things?
+          </InputLabel>
+          <Slider
+            aria-label="curiosity"
+            value={data.curiosity}
+            onChange={handleChange}
+            name="curiosity"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="attention-to-detail">
+            How will you rate yourself for observing minute details while doing
+            a task, reading a book etc?
+          </InputLabel>
+          <Slider
+            aria-label="attention-to-detail"
+            value={data.attentionToDetail}
+            onChange={handleChange}
+            name="attentionToDetail"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="adaptability">
+            How quickly can you get used into new environments?
+          </InputLabel>
+          <Slider
+            aria-label="adaptability"
+            value={data.adaptability}
+            onChange={handleChange}
+            name="adaptability"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="problem-solving">
+            Rate your problem solving skills.
+          </InputLabel>
+          <Slider
+            aria-label="problem-solving"
+            value={data.problemSolving}
+            onChange={handleChange}
+            name="problemSolving"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="technical-skills">
+            How familiar are you with new technologies and its trends?
+          </InputLabel>
+          <Slider
+            aria-label="technical-skills"
+            value={data.technicalSkills}
+            onChange={handleChange}
+            name="technicalSkills"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="soft-skills">
+            How will you rate your soft skills for professional environments?
+          </InputLabel>
+          <Slider
+            aria-label="soft-skills"
+            value={data.softSkills}
+            onChange={handleChange}
+            name="softSkills"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="analytical-skills">
+            Rate your analytical skills.
+          </InputLabel>
+          <Slider
+            aria-label="analytical-skills"
+            value={data.analyticalSkills}
+            onChange={handleChange}
+            name="analyticalSkills"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="designing-skills">
+            How much do you like working with colors, graphics and designs?
+          </InputLabel>
+          <Slider
+            aria-label="designing-skills"
+            value={data.designingSkills}
+            onChange={handleChange}
+            name="designingSkills"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="team-work">
+            How much do you like working in a team?
+          </InputLabel>
+          <Slider
+            aria-label="team-work"
+            value={data.teamWork}
+            onChange={handleChange}
+            name="teamWork"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="organizational-skills">
+            How much do you like goal setting and finishing deadlines?
+          </InputLabel>
+          <Slider
+            aria-label="organizational-skills"
+            value={data.organizationalSkills}
+            onChange={handleChange}
+            name="organizationalSkills"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+          <InputLabel id="active-learning">
+            How likely are you to continue learning different things in life?
+          </InputLabel>
+          <Slider
+            aria-label="active-learning"
+            value={data.activeLearning}
+            onChange={handleChange}
+            name="activeLearning"
+            valueLabelDisplay="auto"
+            step={1}
+            marks
+            min={0}
+            max={10}
+          />
+
+          {/* <Link to="/result"> */}
+          <button class="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 bg-gray-900 rounded-lg hover:bg-gray-800 focus:shadow-outline focus:outline-none text-xl w-[200px] mx-auto">
+            Predict
+          </button>
+          {/* </Link> */}
         </form>
       </div>
     </>
