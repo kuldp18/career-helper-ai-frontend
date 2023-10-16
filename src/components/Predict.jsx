@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   TextField,
   MenuItem,
@@ -11,8 +11,15 @@ import Navbar from './Navbar';
 import { Link } from 'react-router-dom';
 import Modal from 'react-modal';
 import CloseIcon from '@mui/icons-material/Close';
+import { useLocation } from 'react-router-dom';
 
 const Predict = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
@@ -22,12 +29,6 @@ const Predict = () => {
     setIsOpen(true);
   }
   const [data, setData] = useState({
-    age: '',
-    currentlyIn: '',
-    pursuing: '',
-    hsc: '',
-    ssc: '',
-    internship: '',
     history: 0,
     numericalReasoning: 0,
     reading: 0,
@@ -147,6 +148,11 @@ const Predict = () => {
     Engineering,
   };
 
+  const allValuesZero = Object.values(data).every((value) => value === 0);
+
+  // check if all values are hundred
+  const allValuesTen = Object.values(data).every((value) => value === 10);
+
   console.log(percentages);
   const customStyles = {
     content: {
@@ -156,6 +162,9 @@ const Predict = () => {
       bottom: 'auto',
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      backgroundColor: 'rgba(51, 51, 161, 0.872)',
+      color: 'white',
+      fontSize: '2rem',
     },
   };
 
@@ -165,6 +174,15 @@ const Predict = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (allValuesZero) {
+      alert('Cannot submit. Please enter values > 0.');
+    }
+
+    if (allValuesTen) {
+      alert(
+        'According to input given you are eligible for every field but as per our suggestion you should pursue arts,design,entertainment,sports and media occupation or go to mars.'
+      );
+    }
     openModal();
   };
 
@@ -198,9 +216,17 @@ const Predict = () => {
           style={customStyles}
         >
           <ol>
-            <li>1.{keys[0]}</li>
-            <li>2.{keys[1]}</li>
-            <li>3.{keys[2]}</li>
+            <a href="http://localhost:5173">
+              <li>1.{keys[0]}</li>
+            </a>
+
+            <a href="http://localhost:5173">
+              <li>2.{keys[1]}</li>
+            </a>
+
+            <a href="http://localhost:5173">
+              <li>3.{keys[2]}</li>
+            </a>
           </ol>
 
           <p onClick={closeModal} className="cursor-pointer">
@@ -212,7 +238,7 @@ const Predict = () => {
           className="flex flex-col gap-5 w-[70%] mx-auto"
           onSubmit={handleSubmit}
         >
-          <TextField
+          {/* <TextField
             id="outlined-age"
             label="Age"
             type={'number'}
@@ -220,9 +246,9 @@ const Predict = () => {
             value={data.age}
             onChange={handleChange}
             required
-          />
+          /> */}
           <FormControl>
-            <InputLabel id="currently-in">Currently In?</InputLabel>
+            {/* <InputLabel id="currently-in">Currently In?</InputLabel>
             <Select
               labelId="currently-in"
               id="currently-in"
@@ -235,7 +261,7 @@ const Predict = () => {
               <MenuItem value={'10th'}>10th Passed</MenuItem>
               <MenuItem value={'12th'}>12th Passed</MenuItem>
               <MenuItem value={'ug'}>In College</MenuItem>
-            </Select>
+            </Select> */}
           </FormControl>
           {data.currentlyIn === 'ug' && (
             <>
